@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>语音消息</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <div>
+    <button ion-button (click)="setStream()" id="setStreamButton" [disabled]="step!=0">1.setStream(本地视频流绑定)</button>
+    <button ion-button (click)="Start()" id="startButton" [disabled]="step!=1">2.socket.io连接</button>
+    <button ion-button (click)="Call()" id="callButton" [disabled]="step!=2">3.Call(业务层)</button>
+    <button ion-button (click)="answer()" id="answerButton" [disabled]="step!=2">3.ok(业务层)</button>
+    <button ion-button (click)="peerconnection()" id="peerconnectionButton" [disabled]="step!=3">4.peerconnection</button>
+    <button ion-button (click)="setoffer()" id="setofferButton" [disabled]="step!=4">5.setoffer</button>
+    <button ion-button (click)="test()" id="testmsgButton">测试消息</button>
+    <button ion-button (click)="join() " id="setStreamButton " [disabled]="step!=0 ">加入聊天室</button>
+    <button ion-button (click)="leave() " id="setStreamButton " [disabled]="step!=0 ">离开聊天室</button>
+  </div>
+  <div id="meters ">
+    <div id="instant ">
+      <div class="label ">Instant: </div>
+      <meter high="0.25 " max="0.1" [value]="myvalue "></meter>
+      <div class="value "></div>
+    </div>
+  </div>
+  <div>
+    <audio id="localaudio" autoplay></audio>
+  </div>
+
+</ion-content>

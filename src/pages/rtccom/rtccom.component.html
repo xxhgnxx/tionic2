@@ -1,0 +1,26 @@
+<button ion-button (click)="test()" id="testmsgButton">测试消息</button>
+
+
+<div id="meters ">
+  <div id="instant ">
+    <div class="label ">Instant: </div>
+    -----constr------{{t1t}}----test-----{{t2t}}----server-----{{this.socketService.ttt}}
+    <meter high="0.25 " max="0.1" [value]="myvalue"></meter>
+    <div class="value "></div>
+  </div>
+</div>
+<div>
+  <audio id="localaudio" autoplay></audio>
+</div>
+
+<div id="meters ">
+  <div id="instant_r">
+    <div class="label ">Instant: </div>
+    {{myvalue_r}}
+    <meter high="0.25 " max="0.1" [value]="myvalue_r"></meter>
+    <div class="value "></div>
+  </div>
+</div>
+<div>
+  <audio id="remoteaudio" autoplay></audio>
+</div>

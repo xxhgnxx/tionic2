@@ -21,10 +21,7 @@
   </ion-navbar>
 
   <ion-toolbar no-border-top>
-    <ion-searchbar color="primary"
-                   [(ngModel)]="queryText"
-                   (ionInput)="updateSchedule()"
-                   placeholder="Search">
+    <ion-searchbar color="primary" [(ngModel)]="queryText" (ionInput)="updateSchedule()" placeholder="Search">
     </ion-searchbar>
   </ion-toolbar>
 </ion-header>
@@ -36,20 +33,28 @@
 
       <ion-item-divider sticky>
         <ion-label>
-          {{group.time}}
+          {{group[0]}}
         </ion-label>
       </ion-item-divider>
 
-      <ion-item-sliding *ngFor="let session of group.sessions" #slidingItem [attr.track]="session.tracks[0] | lowercase" [hidden]="session.hide">
+      <ion-item-sliding *ngFor="let user of group[1]" #slidingItem [attr.track]="user.role">
 
-        <button ion-item (click)="goToSessionDetail(session)">
-          <h3>{{session.name}}</h3>
-          <p>
-            {{session.timeStart}} &mdash;
-            {{session.timeEnd}}:
-            {{session.location}}
-          </p>
-        </button>
+        <!--<button ion-item (click)="goToSessionDetail(user)">
+       <ion-avatar item>
+          <img [src]="'assets/img/speakers/cheetah.jpg'" alt="Speaker profile pic">
+        </ion-avatar>
+        
+            {{user.name}}
+          
+        </button>-->
+
+        <button ion-item (click)="goToSessionDetail(user)"> 
+        <ion-avatar item-left>
+          <img [src]="'assets/img/speakers/cheetah.jpg'" alt="Speaker profile pic">
+        </ion-avatar>
+        {{user.name}}
+      </button>
+
 
         <ion-item-options>
           <button ion-button color="favorite" (click)="addFavorite(slidingItem, session)" *ngIf="segment === 'all'">
@@ -67,7 +72,7 @@
   </ion-list>
 
   <ion-list-header [hidden]="shownSessions > 0">
-      No Sessions Found
+    No Sessions Found
   </ion-list-header>
 
   <ion-fab bottom right #fab>

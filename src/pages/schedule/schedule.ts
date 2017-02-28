@@ -12,6 +12,8 @@ import { ConferenceData } from '../../providers/conference-data';
 import { ScheduleFilterPage } from '../schedule-filter/schedule-filter';
 import { SessionDetailPage } from '../session-detail/session-detail';
 import { UserData } from '../../providers/user-data';
+import { UserService } from '../../providers/user-server';
+import { SocketService } from '../../providers/socket-server';
 
 
 @Component({
@@ -34,6 +36,8 @@ export class SchedulePage {
   confDate: string;
 
   constructor(
+    public socketService: SocketService,
+    public userService: UserService,
     public alertCtrl: AlertController,
     public app: App,
     public loadingCtrl: LoadingController,
@@ -41,7 +45,7 @@ export class SchedulePage {
     public navCtrl: NavController,
     public confData: ConferenceData,
     public user: UserData,
-  ) {}
+  ) { }
 
   ionViewDidLoad() {
     this.app.setTitle('Schedule');
@@ -52,10 +56,44 @@ export class SchedulePage {
     // Close any open sliding items when the schedule updates
     this.scheduleList && this.scheduleList.closeSlidingItems();
 
-    this.confData.getTimeline(this.dayIndex, this.queryText, this.excludeTracks, this.segment).subscribe((data: any) => {
-      this.shownSessions = data.shownSessions;
-      this.groups = data.groups;
+    // this.confData.getTimeline(this.dayIndex, this.queryText, this.excludeTracks, this.segment).subscribe((data: any) => {
+    //   this.shownSessions = data.shownSessions;
+    //   this.groups = data.groups;
+    // });
+
+    this.groups = new Array();
+    this.groups[0] = new Array();
+    this.groups[0][0] = 'blue';
+    this.groups[0][1] = new Array();
+    this.groups[1] = new Array();
+    this.groups[1][0] = 'red';
+    this.groups[1][1] = new Array();
+    this.groups[2] = new Array();
+    this.groups[2][0] = 'green';
+    this.groups[2][1] = new Array();
+    this.groups[3] = new Array();
+    this.groups[3][0] = 'other';
+    this.groups[3][1] = new Array();
+    this.userService.hList.userList.filter(user => {
+      switch (user.role) {
+        case 'blue':
+          this.groups[0][1].push(user);
+          break;
+        case 'red':
+          this.groups[1][1].push(user);
+          break;
+        case 'green':
+          this.groups[2][1].push(user);
+          break;
+        default:
+          this.groups[3][1].push(user);
+          break;
+      }
     });
+    console.log(this.groups[0]);
+    console.log(this.groups[1]);
+    console.log(this.groups[2]);
+
   }
 
   presentFilter() {
