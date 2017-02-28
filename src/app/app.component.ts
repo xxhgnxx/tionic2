@@ -1,3 +1,6 @@
+/// <reference path="../../typings/index.d.ts"/>
+
+
 import { Component, ViewChild } from '@angular/core';
 
 import { Events, MenuController, Nav, Platform } from 'ionic-angular';
@@ -11,6 +14,11 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { TutorialPage } from '../pages/tutorial/tutorial';
 import { SupportPage } from '../pages/support/support';
 
+
+import { WebrtcComponent } from '../pages/webrtc/webrtc.component';
+import { VoiceComponent } from '../pages/voice/voice.component';
+
+
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
 
@@ -21,6 +29,7 @@ export interface PageInterface {
   logsOut?: boolean;
   index?: number;
 }
+declare var cordova: any;
 
 @Component({
   templateUrl: 'app.template.html'
@@ -63,7 +72,7 @@ export class ConferenceApp {
     // Check if the user has already seen the tutorial
     this.storage.get('hasSeenTutorial')
       .then((hasSeenTutorial) => {
-        if (hasSeenTutorial) {
+        if (0) {
           this.rootPage = TabsPage;
         } else {
           this.rootPage = TutorialPage;
@@ -126,6 +135,15 @@ export class ConferenceApp {
     // Call any initial plugins when ready
     this.platform.ready().then(() => {
       Splashscreen.hide();
+      try {
+        if ((<any>window).device.platform === 'iOS') {
+          cordova.plugins.iosrtc.registerGlobals();
+        }
+      } catch (error) {
+        console.log(error);
+
+      }
+
     });
   }
 }

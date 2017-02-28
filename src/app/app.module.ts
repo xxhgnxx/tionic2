@@ -9,7 +9,6 @@ import { AboutPage } from '../pages/about/about';
 import { PopoverPage } from '../pages/about-popover/about-popover';
 import { AccountPage } from '../pages/account/account';
 import { LoginPage } from '../pages/login/login';
-import { MapPage } from '../pages/map/map';
 import { SchedulePage } from '../pages/schedule/schedule';
 import { ScheduleFilterPage } from '../pages/schedule-filter/schedule-filter';
 import { SessionDetailPage } from '../pages/session-detail/session-detail';
@@ -23,6 +22,17 @@ import { SupportPage } from '../pages/support/support';
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
 
+// new
+import { WebrtcComponent } from '../pages/webrtc/webrtc.component';
+import { VoiceComponent } from '../pages/voice/voice.component';
+import { ChatComponent } from '../pages/chat/chat.component';
+import { RtcComponent } from '../pages/rtccom/rtccom.component';
+import { MyvedioComponent } from '../pages/myvedio/myvedio.component';
+
+import { SocketService } from '../providers/socket-server';
+import { UserService } from '../providers/user-server';
+import { WebrtcService } from '../providers/webrtc-server';
+
 
 @NgModule({
   declarations: [
@@ -30,7 +40,11 @@ import { UserData } from '../providers/user-data';
     AboutPage,
     AccountPage,
     LoginPage,
-    MapPage,
+    WebrtcComponent,
+    MyvedioComponent,
+    RtcComponent,
+    VoiceComponent,
+    ChatComponent,
     PopoverPage,
     SchedulePage,
     ScheduleFilterPage,
@@ -51,7 +65,11 @@ import { UserData } from '../providers/user-data';
     AboutPage,
     AccountPage,
     LoginPage,
-    MapPage,
+    WebrtcComponent,
+    MyvedioComponent,
+    VoiceComponent,
+    ChatComponent,
+    RtcComponent,
     PopoverPage,
     SchedulePage,
     ScheduleFilterPage,
@@ -63,6 +81,13 @@ import { UserData } from '../providers/user-data';
     TutorialPage,
     SupportPage
   ],
-  providers: [ConferenceData, UserData, Storage]
+  providers: [
+    ConferenceData,
+    UserData,
+    SocketService,
+    WebrtcService,
+    UserService,
+    Storage
+  ]
 })
 export class AppModule { }

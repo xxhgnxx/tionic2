@@ -1,0 +1,8 @@
+{
+  "globalDependencies": {
+    "socket.io-client": "registry:dt/socket.io-client#1.4.4+20161116080703"
+  },
+  "dependencies": {
+    "js-yaml": "registry:dt/js-yaml#3.5.2+20161220142525"
+  }
+}
