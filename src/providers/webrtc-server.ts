@@ -69,8 +69,8 @@ export class WebrtcService {
         navigator.getUserMedia(mediaOptions, (stream: MediaStream) => {
             this.thispc = pc;
             pc.addStream(stream);
-            this.stream_l_unsave = window.URL.createObjectURL(stream);
-            this.stream_l = this.domSanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(stream));
+            // this.stream_l_unsave = window.URL.createObjectURL(stream);
+            // this.stream_l = this.domSanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(stream));
             this.socket.videcall.emit(new Data('local', stream));
             // pc.addStream(new MediaStream());
             // console.log("待发送流绑定ok", stream);

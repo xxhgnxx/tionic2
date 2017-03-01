@@ -30,10 +30,8 @@ export class MyvedioComponent {
           this.caller = data.data;
           break;
         case 'local':
-          let localVideo_sub = document.querySelector('#localVideo_sub');
+          let localVideo_sub = document.querySelector('#localVideo');
           (<any>localVideo_sub).src = window.URL.createObjectURL(data.data);
-
-
           break;
         case 'remote':
           // (<any>rvideo).src = 
@@ -43,7 +41,6 @@ export class MyvedioComponent {
 
           (<any>rvideo).src = window.URL.createObjectURL(data.data.stream);
           console.log('收到远端流xxxxxxxxxxxxxxxxxxxxxxxxx', window.URL.createObjectURL(data.data.stream));
-
 
           break;
 
