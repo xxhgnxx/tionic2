@@ -36,8 +36,6 @@ export class WebrtcComponent {
 
   private isanswer = true;
 
-  @ViewChild('video') private localVideo: any;
-  @ViewChild('video2') private remoteVideo: any;
 
   constructor(
     public socketService: SocketService, public domSanitizer: DomSanitizer, public userData: UserData, public userService: UserService
