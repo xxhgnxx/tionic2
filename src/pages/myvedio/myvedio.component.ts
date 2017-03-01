@@ -32,7 +32,10 @@ export class MyvedioComponent {
         // (<any>rvideo).src = 
         let rvideo = document.querySelector('#remoteVideo');
         // (<any>rvideo).srcObject = data.stream;
+        console.log('收到远端流xxxxxxxxxxxxxxxxxxxxxxxxxxxxx', data.stream);
+
         (<any>rvideo).src = window.URL.createObjectURL(data.stream);
+        console.log('收到远端流xxxxxxxxxxxxxxxxxxxxxxxxx', window.URL.createObjectURL(data.stream));
 
       }
 
@@ -76,9 +79,25 @@ export class MyvedioComponent {
   no() { }
 
   test() {
-    this.rtc.init({ audio: true, video: true }, '123', true);
 
-    // console.log(this.rtc.stream_r);
+
+
+    console.log('获取本地流');
+    var mediaOptions = { audio: true, video: true };
+    if (!navigator.getUserMedia) {
+      navigator.getUserMedia = (<any>navigator).getUserMedia || (<any>navigator).webkitGetUserMedia || (<any>navigator).mozGetUserMedia || (<any>navigator).msGetUserMedia;;
+    }
+    if (!navigator.getUserMedia) {
+      return alert('getUserMedia not supported in this browser.');
+    }
+    navigator.getUserMedia(mediaOptions, (stream: any) => {
+      let video = document.querySelector('#testVideo');
+      console.log(stream);
+      (<any>video).src = window.URL.createObjectURL(stream);
+    }, function (e) {
+      console.log(e);
+    });
+
 
 
   }

@@ -7,8 +7,7 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-  <!--<button ion-button (click)="test()" id="testmsgButton">测试</button>-->
-  {{msg}}
+  <button ion-button (click)="test()" id="testmsgButton">测试</button> {{msg}}
   <template [ngIf]="!caller && userService.yourself.videoFree">
     <div *ngFor="let user of userService.hList.userList">
       <button ion-button *ngIf="user.socketId!=userService.yourself.socketId " class="btn btn-warning" (click)="call(user)" [disabled]="!(user.isOnline && user.videoFree)">{{user.name}}</button>
@@ -22,6 +21,7 @@
   <div>
     <!--<video id="remoteVideo" autoplay [src]="rtc.stream_r"></video>-->
     <video id="remoteVideo" autoplay></video>
+    <video id="testVideo" autoplay></video>
   </div>
 
   <template [ngIf]="caller">
