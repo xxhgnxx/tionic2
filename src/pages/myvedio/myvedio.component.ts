@@ -32,10 +32,10 @@ export class MyvedioComponent {
         // (<any>rvideo).src = 
         let rvideo = document.querySelector('#remoteVideo');
         // (<any>rvideo).srcObject = data.stream;
-        console.log('收到远端流xxxxxxxxxxxxxxxxxxxxxxxxxxxxx', data.stream);
+        console.log('收到远端流xxxxxxxxxxxxxxxxxxxxxxxxxxxxx', data.data.stream);
 
-        (<any>rvideo).src = window.URL.createObjectURL(data.stream);
-        console.log('收到远端流xxxxxxxxxxxxxxxxxxxxxxxxx', window.URL.createObjectURL(data.stream));
+        (<any>rvideo).src = window.URL.createObjectURL(data.data.stream);
+        console.log('收到远端流xxxxxxxxxxxxxxxxxxxxxxxxx', window.URL.createObjectURL(data.data.stream));
 
       }
 
