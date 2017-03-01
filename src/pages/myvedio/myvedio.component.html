@@ -15,9 +15,12 @@
   </template>
 
   <div>
-    <!--<video id="localVideo" autoplay muted></video>-->
-
-    <video id="localVideo" autoplay muted [src]="rtc.stream_l"></video>
+    消息通知(unsave)
+    <video id="localVideo_sub" autoplay muted></video>
+    src数据绑定(unsave)
+    <video id="localVideo_stream_l_unsave" autoplay muted [src]="rtc.stream_l_unsave"></video>
+    src数据绑定(save)
+    <video id="localVideo_stream_l" autoplay muted [src]="rtc.stream_l"></video>
   </div>
   <div>
     <!--<video id="remoteVideo" autoplay [src]="rtc.stream_r"></video>-->

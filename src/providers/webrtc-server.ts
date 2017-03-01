@@ -12,7 +12,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class WebrtcService {
     private rtcEmitter: EventEmitter<any>;
     public stream_l: any;
-    public stream_tttt: any;
+    public stream_l_unsave: any;
     public stream_r: any;
     public thispc: any
     private iceServer = {
@@ -68,12 +68,10 @@ export class WebrtcService {
         }
         navigator.getUserMedia(mediaOptions, (stream: MediaStream) => {
             this.thispc = pc;
-            this.stream_tttt = stream;
-
             pc.addStream(stream);
-            this.stream_l = window.URL.createObjectURL(stream);
-            // this.stream_l = this.domSanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(stream));
-            // this.socket.videcall.emit(new Data('local', stream));
+            this.stream_l_unsave = window.URL.createObjectURL(stream);
+            this.stream_l = this.domSanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(stream));
+            this.socket.videcall.emit(new Data('local', stream));
             // pc.addStream(new MediaStream());
             // console.log("待发送流绑定ok", stream);
             pc.onaddstream = (e: any) => {

@@ -24,20 +24,35 @@ export class MyvedioComponent {
   ) {
 
     this.videcall = this.socket.videcall.subscribe((data: any) => {
-      if (data.type === 'call') {
-        this.caller = data.data;
 
-      } else {
+      switch (data.type) {
+        case 'call':
+          this.caller = data.data;
+          break;
+        case 'local':
+          let localVideo_sub = document.querySelector('#localVideo_sub');
+          (<any>localVideo_sub).src = window.URL.createObjectURL(data.data);
 
-        // (<any>rvideo).src = 
-        let rvideo = document.querySelector('#remoteVideo');
-        // (<any>rvideo).srcObject = data.stream;
-        console.log('收到远端流xxxxxxxxxxxxxxxxxxxxxxxxxxxxx', data.data.stream);
 
-        (<any>rvideo).src = window.URL.createObjectURL(data.data.stream);
-        console.log('收到远端流xxxxxxxxxxxxxxxxxxxxxxxxx', window.URL.createObjectURL(data.data.stream));
+          break;
+        case 'remote':
+          // (<any>rvideo).src = 
+          let rvideo = document.querySelector('#remoteVideo');
+          // (<any>rvideo).srcObject = data.stream;
+          console.log('收到远端流xxxxxxxxxxxxxxxxxxxxxxxxxxxxx', data.data.stream);
 
+          (<any>rvideo).src = window.URL.createObjectURL(data.data.stream);
+          console.log('收到远端流xxxxxxxxxxxxxxxxxxxxxxxxx', window.URL.createObjectURL(data.data.stream));
+
+
+          break;
+
+        default:
+          break;
       }
+
+
+
 
 
     });
