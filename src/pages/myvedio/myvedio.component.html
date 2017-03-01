@@ -7,30 +7,30 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-  <button ion-button (click)="test()" id="testmsgButton">测试</button>
-  <!--{{msg}}
+  <button ion-button (click)="test()" id="testmsgButton">测试</button> {{msg}}
   <template [ngIf]="!caller && userService.yourself.videoFree">
     <div *ngFor="let user of userService.hList.userList">
       <button ion-button *ngIf="user.socketId!=userService.yourself.socketId " class="btn btn-warning" (click)="call(user)" [disabled]="!(user.isOnline && user.videoFree)">{{user.name}}</button>
     </div>
-
   </template>
 
   <div>
+    <!--<video id="localVideo" autoplay muted></video>-->
+
     <video id="localVideo" autoplay muted [src]="rtc.stream_l"></video>
   </div>
   <div>
-    <video id="remoteVideo" autoplay [src]="rtc.stream_r"></video>
+    <!--<video id="remoteVideo" autoplay [src]="rtc.stream_r"></video>-->
     <video id="remoteVideo" autoplay></video>
-  </div>-->
+  </div>
   <div>
     <video id="testVideo" autoplay muted></video>
   </div>
-  <!--
+
   <template [ngIf]="caller">
     {{caller}}发来视频请求
     <button ion-button class="btn btn-warning" (click)="answer(true)">同意</button>
     <button ion-button class="btn btn-warning" (click)="answer(false)">挂断</button>
-  </template>-->
+  </template>
 
 </ion-content>

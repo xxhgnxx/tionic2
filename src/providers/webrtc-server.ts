@@ -71,7 +71,9 @@ export class WebrtcService {
             this.stream_tttt = stream;
 
             pc.addStream(stream);
-            this.stream_l = this.domSanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(stream));
+            this.stream_l = window.URL.createObjectURL(stream);
+            // this.stream_l = this.domSanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(stream));
+            // this.socket.videcall.emit(new Data('local', stream));
             // pc.addStream(new MediaStream());
             // console.log("待发送流绑定ok", stream);
             pc.onaddstream = (e: any) => {
@@ -79,7 +81,7 @@ export class WebrtcService {
                 console.log(e.stream);
                 // console.log(e.stream.active);
                 // console.log(e);
-                this.socket.videcall.emit(e);
+                this.socket.videcall.emit(new Data('remote', e));
                 // this.remoteVideo.nativeElement.src = URL.createObjectURL(e.stream);
                 // this.stream_r = this.domSanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(e.stream));
                 // this.stream_r = window.URL.createObjectURL(e.stream);
