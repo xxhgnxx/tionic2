@@ -35,5 +35,27 @@
   "devDependencies": {
     "@ionic/app-scripts": "1.0.0",
     "typescript": "^2.1.5"
-  }
+  },
+  "cordovaPlugins": [
+    "cordova-plugin-inappbrowser",
+    "cordova-plugin-wkwebview-engine",
+    "ionic-plugin-keyboard",
+    "cordova-plugin-whitelist",
+    "cordova-plugin-console",
+    "cordova-plugin-statusbar",
+    "cordova-plugin-device",
+    "cordova-plugin-crosswalk-webview",
+    "cordova-plugin-splashscreen",
+    "cordova-plugin-iosrtc",
+    "cordova-plugin-media-capture",
+    "cordova-plugin-file",
+    "cordova-plugin-compat"
+  ],
+  "cordovaPlatforms": [
+    {
+      "platform": "ios",
+      "version": "",
+      "locator": "ios"
+    }
+  ]
 }
