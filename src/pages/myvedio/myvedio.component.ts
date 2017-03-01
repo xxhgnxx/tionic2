@@ -33,6 +33,7 @@ export class MyvedioComponent {
         let rvideo = document.querySelector('#remoteVideo');
         // (<any>rvideo).srcObject = data.stream;
         (<any>rvideo).src = window.URL.createObjectURL(data.stream);
+
       }
 
 

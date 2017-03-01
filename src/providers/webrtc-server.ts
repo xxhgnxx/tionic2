@@ -29,7 +29,7 @@ export class WebrtcService {
         this.rtcEmitter = this.socket.rtcEmitter.subscribe((data: Data) => {
             // console.log('收到数据包', data);
             if (data.type === 'desc') {
-                console.log('收到desc', data);
+                // console.log('收到desc', data);
 
                 this.setdesc(data);
                 return;
@@ -46,7 +46,7 @@ export class WebrtcService {
         let pc = new (<any>window).RTCPeerConnection(this.iceServer);
         this.pclist.set(who_id, pc);
         pc.onicecandidate = (evt: any) => {
-            console.log('获取candidate');
+            // console.log('获取candidate');
             if (evt.candidate) {
                 let tmp = new Data('candidate', evt.candidate)
                 tmp.fromWho = this.socket.socket.id;
@@ -55,7 +55,7 @@ export class WebrtcService {
                 // console.log('send icecandidate');
             };
         };
-        console.log('youareoffer', youareoffer);
+        // console.log('youareoffer', youareoffer);
 
 
 
@@ -73,10 +73,10 @@ export class WebrtcService {
             pc.addStream(stream);
             this.stream_l = this.domSanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(stream));
             // pc.addStream(new MediaStream());
-            console.log("待发送流绑定ok", stream);
+            // console.log("待发送流绑定ok", stream);
             pc.onaddstream = (e: any) => {
-                // console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxx收到远端流，绑定');
-                // console.log(e.stream);
+                console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxx收到远端流，绑定');
+                console.log(e.stream);
                 // console.log(e.stream.active);
                 // console.log(e);
                 this.socket.videcall.emit(e);
@@ -88,16 +88,16 @@ export class WebrtcService {
             if (youareoffer) {
                 pc.createOffer().then(
                     (desc: any) => {
-                        console.log('createOffer成功');
+                        // console.log('createOffer成功');
                         pc.setLocalDescription(desc).then(
                             () => {
-                                console.log('设置本地desc成功_Offer_desc', desc);
+                                // console.log('设置本地desc成功_Offer_desc', desc);
                                 let tmp = new Data('desc', desc)
                                 tmp.id_answer = who_id;
                                 tmp.id_offer = this.socket.socket.id;
                                 tmp.from_offer = true;
                                 tmp.toWho = who_id;
-                                console.log('发送desc', tmp);
+                                // console.log('发送desc', tmp);
                                 this.socket.emit(tmp);
                             },
                             (err: any) => {
@@ -120,19 +120,9 @@ export class WebrtcService {
 
     }
 
-    addstreamtt() {
-        console.log(this.thispc);
-        console.log(this.stream_tttt);
-
-        var event = new (<any>window).MediaStreamEvent("addstrem", { "stream": this.stream_tttt });
-        // this.thispc.addStream(this.stream_tttt);
-
-    }
-
-
 
     public setdesc(data: Data) {
-        console.log('收到desc', data.data);
+        // console.log('收到desc', data.data);
         let pc: any
         if (data.from_offer) {
             pc = this.pclist.get(data.id_offer);
@@ -141,18 +131,18 @@ export class WebrtcService {
         }
         pc.setRemoteDescription(new (<any>window).RTCSessionDescription(data.data)).then(
             () => {
-                console.log('设置远端desc成功');
+                // console.log('设置远端desc成功');
                 if (data.from_offer) {
                     pc.createAnswer().then(
                         (desc: any) => {
-                            console.log('createAnswer成功');
+                            // console.log('createAnswer成功');
                             pc.setLocalDescription(desc).then(
                                 () => {
-                                    console.log('answer_desc_设置本地desc成功', desc);
+                                    // console.log('answer_desc_设置本地desc成功', desc);
                                     data.from_offer = false;
                                     data.toWho = data.id_offer;
                                     data.data = desc;
-                                    console.log('发送desc', data);
+                                    // console.log('发送desc', data);
                                     this.socket.emit(data);
                                 },
                                 (err: any) => console.log('setLocalDesc错误', err));
