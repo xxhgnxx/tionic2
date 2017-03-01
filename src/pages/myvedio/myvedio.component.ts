@@ -24,7 +24,7 @@ export class MyvedioComponent {
   ) {
 
     this.videcall = this.socket.videcall.subscribe((data: any) => {
-      if (data.data) {
+      if (data.type === 'call') {
         this.caller = data.data;
 
       } else {
