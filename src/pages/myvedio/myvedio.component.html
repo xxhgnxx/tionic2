@@ -20,7 +20,8 @@
     <video id="localVideo" autoplay muted [src]="rtc.stream_l"></video>
   </div>
   <div>
-    <video id="remoteVideo" autoplay [src]="rtc.stream_r"></video>
+    <!--<video id="remoteVideo" autoplay [src]="rtc.stream_r"></video>-->
+    <video id="remoteVideo" autoplay></video>
   </div>
 
   <template [ngIf]="caller">

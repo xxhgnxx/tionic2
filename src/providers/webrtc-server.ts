@@ -79,9 +79,9 @@ export class WebrtcService {
                 // console.log(e.stream);
                 // console.log(e.stream.active);
                 // console.log(e);
-                // this.socket.videcall.emit(e);
+                this.socket.videcall.emit(e);
                 // this.remoteVideo.nativeElement.src = URL.createObjectURL(e.stream);
-                this.stream_r = this.domSanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(e.stream));
+                // this.stream_r = this.domSanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(e.stream));
                 // this.stream_r = window.URL.createObjectURL(e.stream);
 
             };
