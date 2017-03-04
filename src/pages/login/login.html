@@ -3,13 +3,13 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>欢迎来到神TM希特勒</ion-title>
+    <ion-title>欢迎~</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
   <div class="logo">
-    <img src="assets/img/loginpic.png" alt="Ionic logo">
+    <img [src]="socketService.isconnected?'assets/img/loading.jpg':'assets/img/connecting.jpg'" alt="Ionic logo">
   </div>
 
   <form #loginForm="ngForm" novalidate>
@@ -36,7 +36,7 @@
 
     <ion-row responsive-sm>
       <ion-col>
-        <button ion-button (click)="onLogin(loginForm)" type="submit" block>Login</button>
+        <button ion-button (click)="onLogin(loginForm)" type="submit" block [disabled]="submiting || !socketService.isconnected">Login</button>
       </ion-col>
       <ion-col>
         无需注册，首次登陆即为注册过程
@@ -45,5 +45,6 @@
       </ion-col>
     </ion-row>
   </form>
+  <!--<button ion-button (click)="test()" id="testmsgButton">测试</button> {{msg}}-->
 
 </ion-content>

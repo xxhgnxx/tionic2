@@ -20,7 +20,9 @@ import { VoiceComponent } from '../pages/voice/voice.component';
 
 
 import { ConferenceData } from '../providers/conference-data';
-import { UserData } from '../providers/user-data';
+// import { UserData } from '../providers/user-data';
+import { UserService } from '../providers/user-server';
+
 
 export interface PageInterface {
   title: string;
@@ -43,10 +45,10 @@ export class ConferenceApp {
   // the left menu only works after login
   // the login page disables the left menu
   appPages: PageInterface[] = [
-    { title: 'Schedule', component: TabsPage, icon: 'calendar' },
-    { title: 'Speakers', component: TabsPage, index: 1, icon: 'contacts' },
-    { title: 'Map', component: TabsPage, index: 2, icon: 'map' },
-    { title: 'About', component: TabsPage, index: 3, icon: 'information-circle' }
+    { title: '用户列表', component: TabsPage, icon: 'contacts' },
+    { title: '文字聊天', component: TabsPage, index: 1, icon: 'chatboxes' },
+    { title: '语音房间', component: TabsPage, index: 2, icon: 'microphone' },
+    { title: '视频房间', component: TabsPage, index: 3, icon: 'videocam' }
   ];
   loggedInPages: PageInterface[] = [
     { title: 'Account', component: AccountPage, icon: 'person' },
@@ -62,18 +64,19 @@ export class ConferenceApp {
 
   constructor(
     public events: Events,
-    public userData: UserData,
+    // public userData: UserData,
     public menu: MenuController,
     public platform: Platform,
     public confData: ConferenceData,
+    public userService: UserService,
     public storage: Storage
   ) {
 
     // Check if the user has already seen the tutorial
     this.storage.get('hasSeenTutorial')
       .then((hasSeenTutorial) => {
-        if (0) {
-          this.rootPage = TabsPage;
+        if (hasSeenTutorial) {
+          this.rootPage = LoginPage;
         } else {
           this.rootPage = TutorialPage;
         }
@@ -84,9 +87,15 @@ export class ConferenceApp {
     confData.load();
 
     // decide which menu items should be hidden by current login status stored in local storage
-    this.userData.hasLoggedIn().then((hasLoggedIn) => {
-      this.enableMenu(hasLoggedIn === true);
-    });
+    // this.userData.hasLoggedIn().then((hasLoggedIn) => {
+    //   this.enableMenu(hasLoggedIn === true);
+    // });
+    if (this.userService.isLogin) {
+      this.enableMenu(true);
+
+    } else {
+      this.enableMenu(false);
+    }
 
     this.listenToLoginEvents();
   }
@@ -107,7 +116,7 @@ export class ConferenceApp {
     if (page.logsOut === true) {
       // Give the menu time to close before changing to logged out
       setTimeout(() => {
-        this.userData.logout();
+        // this.userData.logout();
       }, 1000);
     }
   }

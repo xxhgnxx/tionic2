@@ -12,6 +12,7 @@ import { EventEmitter } from '@angular/core';
 @Injectable()
 export class SocketService {
     private testmsglist = new Array();
+    public isconnected = false;
     public socket: SocketIOClient.Socket;
     @Output() loginResult: EventEmitter<any> = new EventEmitter();
     @Output() videcall: EventEmitter<any> = new EventEmitter();
@@ -44,6 +45,7 @@ export class SocketService {
                 }, 1000);
                 this.socket.once('ok', () => {
                     console.log(Date().toString().slice(15, 25), '连接服务器', '成功', this.socket.id);
+                    this.isconnected = true;
                     resolve(this.socket.id);
                     clearTimeout(tmptimer);
                     this.init();
@@ -99,7 +101,9 @@ export class SocketService {
 
 
             case 'loginSuccess':
+                this.events.publish('user:login');
                 this.loginResult.emit('认证成功');
+                this.userService.isLogin = true;
                 break;
             case 'test':
                 console.log('测试消息', data);
@@ -156,17 +160,17 @@ export class SocketService {
                 let logindata = new Data("login", "");
                 logindata.name = name;
                 logindata.password = password;
-                this.send(logindata, this.callbackresout);
                 let tmptimer = setTimeout(() => {
                     console.log(this.socket);
                     this.socket.removeListener('login');
                     resolve(-2)
                 }, 3000);
-                this.socket.once('login', () => {
+                this.socket.once('loginSuccess', () => {
                     console.log(Date().toString().slice(15, 25), '登陆成功');
                     resolve(1);
                     clearTimeout(tmptimer);
                 });
+                this.send(logindata, this.callbackresout);
             } else {
                 resolve(0);
             }

@@ -16,11 +16,19 @@ export class LoginPage {
     password?: string
   } = {};
   submiting = false;
-  popmsg = "111";
-  constructor(public navCtrl: NavController, public socketService: SocketService, public userData: UserData, public userService: UserService) {
-    this.socketService.start();
-  }
+  popmsg = "";
+  constructor(public navCtrl: NavController, public socketService: SocketService, public userService: UserService) {
+    if (this.userService.isLogin) {
+      this.navCtrl.push(TabsPage);
+    } else {
+      this.socketService.start();
+    }
 
+  }
+  test() {
+    console.log(this.socketService.isconnected);
+
+  }
   onLogin(form: NgForm) {
     this.submiting = true;
     if (form.valid) {
@@ -33,18 +41,17 @@ export class LoginPage {
     this.submiting = true;
     this.socketService.login(name, password);
     this.socketService.loginResult.subscribe((result: string) => {
-      this.submiting = false;
       if (result === '认证成功') {
         console.log('登陆成功');
         this.userService.myname = name;
         this.userService.isLogin = true;
         this.navCtrl.push(TabsPage);
       } else {
+        this.submiting = false;
         if (result === '认证失败') {
           this.popmsg = this.userService.other;
-
         } else {
-          this.popmsg = result;
+          this.popmsg = "账户或密码错误";
         }
         setTimeout(() => this.popmsg = '', 3000);
         // this.socketsevice.disconnect();
