@@ -1,23 +1,24 @@
 <ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
+    <ion-navbar>
+        <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Account</ion-title>
-  </ion-navbar>
+        <ion-title>资料修改</ion-title>
+    </ion-navbar>
 </ion-header>
 
 <ion-content class="outer-content">
-  <div padding-top text-center *ngIf="username">
-    <img src="http://www.gravatar.com/avatar?d=mm&s=140" alt="avatar">
-    <h2>{{username}}</h2>
+    <div padding-top text-center *ngIf="this.userService.isLogin">
+        <!--<img src="http://www.gravatar.com/avatar?d=mm&s=140" alt="avatar">-->
+        <img [src]="this.userService.yourself.headPic|getHead" alt="avatar">
 
-    <ion-list inset>
-      <button ion-item (click)="updatePicture()">Update Picture</button>
-      <button ion-item (click)="changeUsername()">Change Username</button>
-      <button ion-item (click)="changePassword()">Change Password</button>
-      <button ion-item (click)="support()">Support</button>
-      <button ion-item (click)="logout()">Logout</button>
-    </ion-list>
-  </div>
+        <h2>{{this.userService.yourself.name}}</h2>
+
+        <ion-list inset>
+            <button ion-item (click)="updatePicture()" disabled>修改头像</button>
+            <button ion-item (click)="changeUsername()" disabled>修改昵称</button>
+            <button ion-item (click)="changePassword()" disabled>修改密码</button>
+            <button ion-item (click)="logout()">Logout</button>
+        </ion-list>
+    </div>
 </ion-content>

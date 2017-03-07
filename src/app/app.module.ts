@@ -29,6 +29,10 @@ import { ChatComponent } from '../pages/chat/chat.component';
 import { RtcComponent } from '../pages/rtccom/rtccom.component';
 import { MyvedioComponent } from '../pages/myvedio/myvedio.component';
 
+
+// 管道
+import { GetHeadPope } from '../providers/getHeadPope';
+// 服务
 import { SocketService } from '../providers/socket-server';
 import { UserService } from '../providers/user-server';
 import { WebrtcService } from '../providers/webrtc-server';
@@ -47,6 +51,7 @@ import { WebrtcService } from '../providers/webrtc-server';
     ChatComponent,
     PopoverPage,
     SchedulePage,
+    GetHeadPope,
     ScheduleFilterPage,
     SessionDetailPage,
     SignupPage,

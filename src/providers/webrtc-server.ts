@@ -12,6 +12,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class WebrtcService {
     private rtcEmitter: EventEmitter<any>;
     public stream_l: any;
+    public localstream: MediaStream;
     public stream_l_unsave: any;
     public stream_r: any;
     public thispc: any
@@ -43,7 +44,10 @@ export class WebrtcService {
 
     }
     init(mediaOptions: any, who_id: string, youareoffer: boolean) {
+
         let pc = new (<any>window).RTCPeerConnection(this.iceServer);
+        console.log('初始化链接');
+
         this.pclist.set(who_id, pc);
         pc.onicecandidate = (evt: any) => {
             // console.log('获取candidate');
@@ -68,6 +72,7 @@ export class WebrtcService {
         }
         navigator.getUserMedia(mediaOptions, (stream: MediaStream) => {
             this.thispc = pc;
+            this.localstream = stream;
             pc.addStream(stream);
             // this.stream_l_unsave = window.URL.createObjectURL(stream);
             // this.stream_l = this.domSanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(stream));
@@ -120,6 +125,15 @@ export class WebrtcService {
 
     }
 
+    close(id: string) {
+        let pc = this.pclist.get(id);
+        // this.localstream.stop();
+        pc.close();
+        let data = new Data('rtcend', id)
+        data.toWho = id;
+        // console.log('发送desc', tmp);
+        this.socket.emit(data);
+    }
 
     public setdesc(data: Data) {
         // console.log('收到desc', data.data);

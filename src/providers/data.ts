@@ -148,81 +148,81 @@ export function dataLoader(userService: any, theGameService: any, theMsgService:
     //   userService.whoAmI(data.playerList);
     // }
 
-    if (typeof data.proIndex !== 'undefined') {
-        theGameService.proIndex = data.proIndex;
-    }
-    if (typeof data.gametype !== 'undefined') {
-        theGameService.gametype = data.gametype;
-    }
-    if (typeof data.isgameover !== 'undefined') {
-        theGameService.isgameover = data.isgameover;
-    }
-    if (typeof data.nowVote !== 'undefined') {
+    // if (typeof data.proIndex !== 'undefined') {
+    //     theGameService.proIndex = data.proIndex;
+    // }
+    // if (typeof data.gametype !== 'undefined') {
+    //     theGameService.gametype = data.gametype;
+    // }
+    // if (typeof data.isgameover !== 'undefined') {
+    //     theGameService.isgameover = data.isgameover;
+    // }
+    // if (typeof data.nowVote !== 'undefined') {
 
-        theGameService.nowVote = data.nowVote;
-    }
-    if (typeof data.voteCount !== 'undefined') {
-        theGameService.voteCount = data.voteCount;
-    }
-    if (typeof data.proList !== 'undefined') {
-        theGameService.proList = data.proList;
-    }
-    if (typeof data.started !== 'undefined') {
-        theGameService.started = data.started;
-    }
-    if (typeof data.proEffBlue !== 'undefined') {
-        theGameService.proEffBlue = data.proEffBlue;
-    }
-    if (typeof data.proEffRed !== 'undefined') {
-        theGameService.proEffRed = data.proEffRed;
-    }
-    if (typeof data.failTimes !== 'undefined') {
-        theGameService.failTimes = data.failTimes;
-    }
-    if (typeof data.fascistCount !== 'undefined') {
-        theGameService.fascistCount = data.fascistCount;
-    }
-    if (typeof data.voteList !== 'undefined') {
-        theGameService.voteList = data.voteList;
-    }
-    if (typeof data.liberalCount !== 'undefined') {
-        theGameService.liberalCount = data.liberalCount;
-    }
-    if (typeof data.lastPre !== 'undefined') {
-        theGameService.lastPre = data.lastPre;
-    }
-    if (typeof data.lastPrm !== 'undefined') {
-        theGameService.lastPrm = data.lastPrm;
-    }
-    if (typeof data.pre !== 'undefined') {
-        theGameService.pre = data.pre;
-    }
-    if (typeof data.prenext !== 'undefined') {
-        theGameService.prenext = data.prenext;
-    }
-    if (typeof data.prm !== 'undefined') {
-        theGameService.prm = data.prm;
-    }
+    //     theGameService.nowVote = data.nowVote;
+    // }
+    // if (typeof data.voteCount !== 'undefined') {
+    //     theGameService.voteCount = data.voteCount;
+    // }
+    // if (typeof data.proList !== 'undefined') {
+    //     theGameService.proList = data.proList;
+    // }
+    // if (typeof data.started !== 'undefined') {
+    //     theGameService.started = data.started;
+    // }
+    // if (typeof data.proEffBlue !== 'undefined') {
+    //     theGameService.proEffBlue = data.proEffBlue;
+    // }
+    // if (typeof data.proEffRed !== 'undefined') {
+    //     theGameService.proEffRed = data.proEffRed;
+    // }
+    // if (typeof data.failTimes !== 'undefined') {
+    //     theGameService.failTimes = data.failTimes;
+    // }
+    // if (typeof data.fascistCount !== 'undefined') {
+    //     theGameService.fascistCount = data.fascistCount;
+    // }
+    // if (typeof data.voteList !== 'undefined') {
+    //     theGameService.voteList = data.voteList;
+    // }
+    // if (typeof data.liberalCount !== 'undefined') {
+    //     theGameService.liberalCount = data.liberalCount;
+    // }
+    // if (typeof data.lastPre !== 'undefined') {
+    //     theGameService.lastPre = data.lastPre;
+    // }
+    // if (typeof data.lastPrm !== 'undefined') {
+    //     theGameService.lastPrm = data.lastPrm;
+    // }
+    // if (typeof data.pre !== 'undefined') {
+    //     theGameService.pre = data.pre;
+    // }
+    // if (typeof data.prenext !== 'undefined') {
+    //     theGameService.prenext = data.prenext;
+    // }
+    // if (typeof data.prm !== 'undefined') {
+    //     theGameService.prm = data.prm;
+    // }
 
-    if (typeof data.proX3List !== 'undefined') {
-        // theGameService.proX3List = data.proX3List;
-    }
-    if (typeof data.isVoted !== 'undefined') {
-        theGameService.isVoted = data.isVoted;
-    }
-    if (typeof data.other !== 'undefined') {
-        theGameService.other = data.other;
-    }
-    if (typeof data.prmTmp !== 'undefined') {
-        theGameService.prmTmp = data.prmTmp;
-    }
-    if (typeof data.target !== 'undefined') {
-        theGameService.target = data.target;
-    }
+    // if (typeof data.proX3List !== 'undefined') {
+    //     // theGameService.proX3List = data.proX3List;
+    // }
+    // if (typeof data.isVoted !== 'undefined') {
+    //     theGameService.isVoted = data.isVoted;
+    // }
+    // // if (typeof data.other !== 'undefined') {
+    // //     theGameService.other = data.other;
+    // // }
+    // if (typeof data.prmTmp !== 'undefined') {
+    //     theGameService.prmTmp = data.prmTmp;
+    // }
+    // if (typeof data.target !== 'undefined') {
+    //     theGameService.target = data.target;
+    // }
 
-    if (typeof data.speakTime !== 'undefined') {
-        theGameService.speakTime = msgdata.speakTime;
-    }
+    // if (typeof data.speakTime !== 'undefined') {
+    //     theGameService.speakTime = msgdata.speakTime;
+    // }
 
     // --------------------- 发言
 

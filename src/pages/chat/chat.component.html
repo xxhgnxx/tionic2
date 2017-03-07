@@ -1,30 +1,30 @@
 <ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
+    <ion-navbar>
+        <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>文字聊天测试页</ion-title>
-  </ion-navbar>
+        <ion-title>文字聊天测试页</ion-title>
+    </ion-navbar>
 </ion-header>
 <ion-content>
-  聊天内容
-  <ion-item *ngFor="let msg of socketService.testmsglist">
-    <ion-avatar item-left>
-      <img [src]="'assets/img/speakers/cheetah.jpg'" alt="Speaker profile pic">
-    </ion-avatar>
-    <h2>{{msg.name}}</h2>
-    <p>{{msg.data}}</p>
-  </ion-item>
+    聊天内容
+    <ion-item *ngFor="let msg of socketService.testmsglist">
+        <ion-avatar item-left>
+            <img [src]="msg.fromWho.headPic|getHead" alt="Speaker profile pic">
+        </ion-avatar>
+        <h2>{{msg.fromWho.name}}</h2>
+        <p>{{msg.data}}</p>
+    </ion-item>
 </ion-content>
 
 <ion-footer>
-  <ion-toolbar no-border-bottom>
-    <ion-textarea placeholder="这里输入文字.." [(ngModel)]="testmsg"> </ion-textarea>
-    <ion-buttons end>
-      <button ion-button (click)=sendmsg() color="royal">
+    <ion-toolbar no-border-bottom>
+        <ion-textarea placeholder="这里输入文字.." [(ngModel)]="testmsg"> </ion-textarea>
+        <ion-buttons end>
+            <button ion-button (click)=sendmsg() color="royal">
                 Send
                 <ion-icon name="send"></ion-icon>
             </button>
-    </ion-buttons>
-  </ion-toolbar>
+        </ion-buttons>
+    </ion-toolbar>
 </ion-footer>

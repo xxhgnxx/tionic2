@@ -5,6 +5,7 @@ import { AlertController, NavController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import { SupportPage } from '../support/support';
 import { UserData } from '../../providers/user-data';
+import { UserService } from '../../providers/user-server';
 
 
 @Component({
@@ -14,12 +15,12 @@ import { UserData } from '../../providers/user-data';
 export class AccountPage {
   username: string;
 
-  constructor(public alertCtrl: AlertController, public nav: NavController, public userData: UserData) {
+  constructor(public alertCtrl: AlertController, public nav: NavController, public userService: UserService) {
 
   }
 
   ngAfterViewInit() {
-    this.getUsername();
+    // this.getUsername();
   }
 
   updatePicture() {
@@ -44,26 +45,26 @@ export class AccountPage {
     alert.addButton({
       text: 'Ok',
       handler: (data: any) => {
-        this.userData.setUsername(data.username);
-        this.getUsername();
+        // this.userData.setUsername(data.username);
+        // this.getUsername();
       }
     });
 
     alert.present();
   }
 
-  getUsername() {
-    this.userData.getUsername().then((username) => {
-      this.username = username;
-    });
-  }
+  // getUsername() {
+
+  //     this.username = this.userService.yourself.name;
+
+  // }
 
   changePassword() {
     console.log('Clicked to change password');
   }
 
   logout() {
-    this.userData.logout();
+    // this.userData.logout();
     this.nav.setRoot(LoginPage);
   }
 

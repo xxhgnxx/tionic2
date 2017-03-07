@@ -1,50 +1,49 @@
 <ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
+    <ion-navbar>
+        <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>欢迎~</ion-title>
-  </ion-navbar>
+        <ion-title>欢迎~</ion-title>
+    </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <div class="logo">
-    <img [src]="socketService.isconnected?'assets/img/loading.jpg':'assets/img/connecting.jpg'" alt="Ionic logo">
-  </div>
+    <div class="logo">
+        <img [src]="socketService.isconnected?'assets/img/loading.jpg':'assets/img/connecting.jpg'" alt="Ionic logo">
+    </div>
 
-  <form #loginForm="ngForm" novalidate>
-    <ion-list no-lines>
-      <ion-item>
-        <ion-label stacked color="primary">昵称</ion-label>
-        <ion-input class="input_l" [(ngModel)]="login.username" name="username" type="text" #username="ngModel" spellcheck="false"
-          autocapitalize="off" required>
-        </ion-input>
-      </ion-item>
-      <p ion-text [hidden]="username.valid || submitted == false" color="danger" padding-left>
-        请输入昵称
-      </p>
+    <form #loginForm="ngForm" novalidate>
+        <ion-list no-lines>
+            <ion-item>
+                <ion-label stacked color="primary">昵称</ion-label>
+                <ion-input class="input_l" [(ngModel)]="login.username" name="username" type="text" #username="ngModel" spellcheck="false" autocapitalize="off" required placeholder="输入昵称">
+                </ion-input>
+            </ion-item>
+            <p ion-text [hidden]="username.valid || submitted == false" color="danger" padding-left>
+                请输入昵称
+            </p>
 
-      <ion-item>
-        <ion-label stacked color="primary">密码</ion-label>
-        <ion-input class="input_l" [(ngModel)]="login.password" name="password" type="password" #password="ngModel" required>
-        </ion-input>
-      </ion-item>
-      <p ion-text [hidden]="password.valid || submitted == false" color="danger" padding-left>
-        请输入密码
-      </p>
-    </ion-list>
+            <ion-item>
+                <ion-label stacked color="primary">密码</ion-label>
+                <ion-input class="input_l" [(ngModel)]="login.password" name="password" type="password" #password="ngModel" required placeholder="密码">
+                </ion-input>
+            </ion-item>
+            <p ion-text [hidden]="password.valid || submitted == false" color="danger" padding-left>
+                请输入密码
+            </p>
+        </ion-list>
 
-    <ion-row responsive-sm>
-      <ion-col>
-        <button ion-button (click)="onLogin(loginForm)" type="submit" block [disabled]="submiting || !socketService.isconnected">Login</button>
-      </ion-col>
-      <ion-col>
-        无需注册，首次登陆即为注册过程
-        <div>{{popmsg}}
-        </div>
-      </ion-col>
-    </ion-row>
-  </form>
-  <!--<button ion-button (click)="test()" id="testmsgButton">测试</button> {{msg}}-->
+        <ion-row responsive-sm>
+            <ion-col>
+                <button ion-button (click)="onLogin(loginForm)" type="submit" block [disabled]="submiting || !socketService.isconnected">Login</button>
+            </ion-col>
+            <ion-col>
+                无需注册，首次登陆即为注册过程
+                <div>{{popmsg}}
+                </div>
+            </ion-col>
+        </ion-row>
+    </form>
+    <!--<button ion-button (click)="test()" id="testmsgButton">测试</button> {{msg}}-->
 
 </ion-content>

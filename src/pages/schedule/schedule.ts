@@ -14,6 +14,7 @@ import { SessionDetailPage } from '../session-detail/session-detail';
 import { UserData } from '../../providers/user-data';
 import { UserService } from '../../providers/user-server';
 import { SocketService } from '../../providers/socket-server';
+import { MyvedioComponent } from '../myvedio/myvedio.component';
 
 
 @Component({
@@ -32,7 +33,8 @@ export class SchedulePage {
   segment = 'all';
   excludeTracks: any = [];
   shownSessions: any = [];
-  groups: any = [];
+  userlistonline: any = [];
+  userlistdisline: any = [];
   confDate: string;
 
   constructor(
@@ -53,46 +55,34 @@ export class SchedulePage {
   }
 
   updateSchedule() {
-    // Close any open sliding items when the schedule updates
-    this.scheduleList && this.scheduleList.closeSlidingItems();
-
-    // this.confData.getTimeline(this.dayIndex, this.queryText, this.excludeTracks, this.segment).subscribe((data: any) => {
-    //   this.shownSessions = data.shownSessions;
-    //   this.groups = data.groups;
-    // });
-
-    this.groups = new Array();
-    this.groups[0] = new Array();
-    this.groups[0][0] = 'blue';
-    this.groups[0][1] = new Array();
-    this.groups[1] = new Array();
-    this.groups[1][0] = 'red';
-    this.groups[1][1] = new Array();
-    this.groups[2] = new Array();
-    this.groups[2][0] = 'green';
-    this.groups[2][1] = new Array();
-    this.groups[3] = new Array();
-    this.groups[3][0] = 'other';
-    this.groups[3][1] = new Array();
+    
     this.userService.hList.userList.filter(user => {
-      switch (user.role) {
-        case 'blue':
-          this.groups[0][1].push(user);
-          break;
-        case 'red':
-          this.groups[1][1].push(user);
-          break;
-        case 'green':
-          this.groups[2][1].push(user);
-          break;
-        default:
-          this.groups[3][1].push(user);
-          break;
-      }
+      // switch (user.role) {
+      //   case 'blue':
+      //     this.groups[0][1].push(user);
+      //     break;
+      //   case 'red':
+      //     this.groups[1][1].push(user);
+      //     break;
+      //   case 'green':
+      //     this.groups[2][1].push(user);
+      //     break;
+      //   default:
+      //     this.groups[3][1].push(user);
+      //     break;
+      // }
+if (user.isOnline) {
+  this.userlistonline.push(user);
+} else {
+  this.userlistdisline.push(user);
+  
+}
+
+
     });
-    console.log(this.groups[0]);
-    console.log(this.groups[1]);
-    console.log(this.groups[2]);
+    // console.log(this.groups[0]);
+    // console.log(this.groups[1]);
+    // console.log(this.groups[2]);
 
   }
 
@@ -117,29 +107,29 @@ export class SchedulePage {
 
   addFavorite(slidingItem: ItemSliding, sessionData: any) {
 
-    if (this.user.hasFavorite(sessionData.name)) {
-      // woops, they already favorited it! What shall we do!?
-      // prompt them to remove it
-      this.removeFavorite(slidingItem, sessionData, 'Favorite already added');
-    } else {
-      // remember this session as a user favorite
-      this.user.addFavorite(sessionData.name);
+    // if (this.user.hasFavorite(sessionData.name)) {
+    //   // woops, they already favorited it! What shall we do!?
+    //   // prompt them to remove it
+    //   this.removeFavorite(slidingItem, sessionData, 'Favorite already added');
+    // } else {
+    //   // remember this session as a user favorite
+    //   this.user.addFavorite(sessionData.name);
 
-      // create an alert instance
-      let alert = this.alertCtrl.create({
-        title: 'Favorite Added',
-        buttons: [{
-          text: 'OK',
-          handler: () => {
-            // close the sliding item
-            slidingItem.close();
-          }
-        }]
-      });
-      // now present the alert on top of all other content
-      alert.present();
-    }
-
+    //   // create an alert instance
+    //   let alert = this.alertCtrl.create({
+    //     title: 'Favorite Added',
+    //     buttons: [{
+    //       text: 'OK',
+    //       handler: () => {
+    //         // close the sliding item
+    //         slidingItem.close();
+    //       }
+    //     }]
+    //   });
+    //   // now present the alert on top of all other content
+    //   alert.present();
+    // }
+this.navCtrl.push(MyvedioComponent, { tabIndex: 3 });
   }
 
   removeFavorite(slidingItem: ItemSliding, sessionData: any, title: string) {
@@ -182,4 +172,7 @@ export class SchedulePage {
     });
     loading.present();
   }
+
+  
+
 }

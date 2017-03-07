@@ -55,7 +55,7 @@ export class ChatComponent {
     console.log(this.testmsg);
     if (this.testmsg) {
       let data = new Data("testMsg", this.testmsg)
-      data.name = this.userService.myname;
+      data.fromWho = this.userService.yourself;
       this.socketService.emit(data);
     }
     this.testmsg = '';

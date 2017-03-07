@@ -1,89 +1,98 @@
 <ion-header>
-  <ion-navbar no-border-bottom>
-    <button ion-button menuToggle>
+    <ion-navbar no-border-bottom>
+        <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
 
-    <ion-segment [(ngModel)]="segment" (ionChange)="updateSchedule()">
-      <ion-segment-button value="all">
-        All
-      </ion-segment-button>
-      <ion-segment-button value="favorites">
-        Favorites
-      </ion-segment-button>
-    </ion-segment>
+        <ion-segment [(ngModel)]="segment" (ionChange)="updateSchedule()">
+            <ion-segment-button value="all">
+                All
+            </ion-segment-button>
+            <ion-segment-button value="favorites">
+                Favorites
+            </ion-segment-button>
+        </ion-segment>
 
-    <ion-buttons end>
-      <button ion-button icon-only (click)="presentFilter()">
+        <ion-buttons end>
+            <button ion-button icon-only (click)="presentFilter()">
         <ion-icon ios="ios-options-outline" md="md-options"></ion-icon>
       </button>
-    </ion-buttons>
-  </ion-navbar>
+        </ion-buttons>
+    </ion-navbar>
 
-  <ion-toolbar no-border-top>
-    <ion-searchbar color="primary" [(ngModel)]="queryText" (ionInput)="updateSchedule()" placeholder="Search">
-    </ion-searchbar>
-  </ion-toolbar>
+    <ion-toolbar no-border-top>
+        <ion-searchbar color="primary" [(ngModel)]="queryText" (ionInput)="updateSchedule()" placeholder="Search">
+        </ion-searchbar>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-list #scheduleList [hidden]="shownSessions === 0">
+    <ion-list #scheduleList [hidden]="shownSessions === 0">
 
-    <ion-item-group *ngFor="let group of groups" [hidden]="group.hide">
+        <ion-item-group>
 
-      <ion-item-divider sticky>
-        <ion-label>
-          {{group[0]}}
-        </ion-label>
-      </ion-item-divider>
+            <ion-item-divider sticky>
+                <ion-label>
+                    在线用户
+                </ion-label>
+            </ion-item-divider>
 
-      <ion-item-sliding *ngFor="let user of group[1]" #slidingItem [attr.track]="user.role">
+            <ion-item-sliding [hidden]="!user.isOnline" *ngFor="let user of userService.hList.userList" #slidingItem [attr.track]="user.role">
 
-        <!--<button ion-item (click)="goToSessionDetail(user)">
-       <ion-avatar item>
-          <img [src]="'assets/img/speakers/cheetah.jpg'" alt="Speaker profile pic">
-        </ion-avatar>
-        
-            {{user.name}}
-          
-        </button>-->
 
-        <button ion-item (click)="goToSessionDetail(user)"> 
+                <button ion-item (click)="goToSessionDetail(user)"> 
         <ion-avatar item-left>
-          <img [src]="'assets/img/speakers/cheetah.jpg'" alt="Speaker profile pic">
+                      <img [src]="user.headPic|getHead" alt="Speaker profile pic">
         </ion-avatar>
-        {{user.name}}
+        {{user.name}} {{user.isOnline}}
       </button>
-
-
-        <ion-item-options>
-          <button ion-button color="favorite" (click)="addFavorite(slidingItem, session)" *ngIf="segment === 'all'">
-            Favorite
+                <ion-item-options>
+                    <button ion-button color="favorite" (click)="addFavorite(slidingItem, session)" *ngIf="segment === 'all'">
+            视频通话
           </button>
-          <button ion-button color="danger" (click)="removeFavorite(slidingItem, session, 'Remove Favorite')" *ngIf="segment === 'favorites'">
-            Remove
+
+                </ion-item-options>
+
+
+            </ion-item-sliding>
+
+        </ion-item-group>
+
+        <ion-item-group>
+
+            <ion-item-divider sticky>
+                <ion-label>
+                    离线用户
+                </ion-label>
+            </ion-item-divider>
+
+            <ion-item-sliding [hidden]="user.isOnline" *ngFor="let user of userService.hList.userList" #slidingItem [attr.track]="user.role">
+                <button ion-item (click)="goToSessionDetail(user)"> 
+        <ion-avatar item-left>                      <img [src]="user.headPic|getHead" alt="Speaker profile pic">        </ion-avatar>
+        {{user.name}}      </button>
+
+                <ion-item-options>
+                    <button ion-button color="favorite" (click)="addFavorite(slidingItem, session)" *ngIf="segment === 'all'" disabled>
+            视频通话
           </button>
-        </ion-item-options>
 
-      </ion-item-sliding>
+                </ion-item-options>
 
-    </ion-item-group>
+            </ion-item-sliding>
 
-  </ion-list>
+        </ion-item-group>
+    </ion-list>
 
-  <ion-list-header [hidden]="shownSessions > 0">
-    No Sessions Found
-  </ion-list-header>
 
-  <ion-fab bottom right #fab>
-    <button ion-fab><ion-icon name="share"></ion-icon></button>
-    <ion-fab-list side="top">
-      <button ion-fab color="vimeo" (click)="openSocial('Vimeo', fab)"><ion-icon name="logo-vimeo"></ion-icon></button>
-      <button ion-fab color="google" (click)="openSocial('Google+', fab)"><ion-icon name="logo-googleplus"></ion-icon></button>
-      <button ion-fab color="twitter" (click)="openSocial('Twitter', fab)"><ion-icon name="logo-twitter"></ion-icon></button>
-      <button ion-fab color="facebook" (click)="openSocial('Facebook', fab)"><ion-icon name="logo-facebook"></ion-icon></button>
-    </ion-fab-list>
-  </ion-fab>
+    <!--<ion-fab bottom right #fab>
+        <button ion-fab><ion-icon name="share"></ion-icon></button>
+        <ion-fab-list side="top">
+            <button ion-fab color="vimeo" (click)="openSocial('Vimeo', fab)"><ion-icon name="logo-vimeo"></ion-icon></button>
+            <button ion-fab color="google" (click)="openSocial('Google+', fab)"><ion-icon name="logo-googleplus"></ion-icon></button>
+            <button ion-fab color="twitter" (click)="openSocial('Twitter', fab)"><ion-icon name="logo-twitter"></ion-icon></button>
+            <button ion-fab color="facebook" (click)="openSocial('Facebook', fab)"><ion-icon name="logo-facebook"></ion-icon></button>
+        </ion-fab-list>
+    </ion-fab>-->
 
 
 </ion-content>

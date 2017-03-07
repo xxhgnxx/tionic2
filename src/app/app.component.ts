@@ -15,6 +15,7 @@ import { TutorialPage } from '../pages/tutorial/tutorial';
 import { SupportPage } from '../pages/support/support';
 
 
+
 import { WebrtcComponent } from '../pages/webrtc/webrtc.component';
 import { VoiceComponent } from '../pages/voice/voice.component';
 
@@ -22,6 +23,7 @@ import { VoiceComponent } from '../pages/voice/voice.component';
 import { ConferenceData } from '../providers/conference-data';
 // import { UserData } from '../providers/user-data';
 import { UserService } from '../providers/user-server';
+import { SocketService } from '../providers/socket-server';
 
 
 export interface PageInterface {
@@ -51,14 +53,14 @@ export class ConferenceApp {
     { title: '视频房间', component: TabsPage, index: 3, icon: 'videocam' }
   ];
   loggedInPages: PageInterface[] = [
-    { title: 'Account', component: AccountPage, icon: 'person' },
-    { title: 'Support', component: SupportPage, icon: 'help' },
-    { title: 'Logout', component: TabsPage, icon: 'log-out', logsOut: true }
+    { title: '个人资料', component: AccountPage, icon: 'person' },
+    { title: '技术支持', component: SupportPage, icon: 'help' },
+    { title: '登出', component: TabsPage, icon: 'log-out', logsOut: true }
   ];
   loggedOutPages: PageInterface[] = [
-    { title: 'Login', component: LoginPage, icon: 'log-in' },
-    { title: 'Support', component: SupportPage, icon: 'help' },
-    { title: 'Signup', component: SignupPage, icon: 'person-add' }
+    { title: '登陆', component: LoginPage, icon: 'log-in' },
+    { title: '技术支持', component: SupportPage, icon: 'help' },
+    { title: '注册', component: SignupPage, icon: 'person-add' }
   ];
   rootPage: any;
 
@@ -69,6 +71,7 @@ export class ConferenceApp {
     public platform: Platform,
     public confData: ConferenceData,
     public userService: UserService,
+    public socketService: SocketService,
     public storage: Storage
   ) {
 
@@ -104,6 +107,12 @@ export class ConferenceApp {
     // the nav component was found using @ViewChild(Nav)
     // reset the nav to remove previous pages and only have this page
     // we wouldn't want the back button to show in this scenario
+
+    if (page.icon === 'log-out') {
+      this.socketService.logout();
+      return;
+    }
+
     if (page.index) {
       this.nav.setRoot(page.component, { tabIndex: page.index });
 
@@ -133,7 +142,11 @@ export class ConferenceApp {
     });
 
     this.events.subscribe('user:logout', () => {
-      this.enableMenu(false);
+
+      this.nav.setRoot(LoginPage);
+    });
+    this.events.subscribe('socket:call', () => {
+      this.nav.setRoot(TabsPage, { tabIndex: 3 });
     });
   }
   enableMenu(loggedIn: boolean) {

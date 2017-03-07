@@ -20,6 +20,7 @@ export class LoginPage {
   constructor(public navCtrl: NavController, public socketService: SocketService, public userService: UserService) {
     if (this.userService.isLogin) {
       this.navCtrl.push(TabsPage);
+      console.log('插入tab页');
     } else {
       this.socketService.start();
     }
@@ -30,8 +31,8 @@ export class LoginPage {
 
   }
   onLogin(form: NgForm) {
-    this.submiting = true;
     if (form.valid) {
+      this.submiting = true;
       this.tologin(this.login.username, this.login.password);
 
     }
@@ -40,7 +41,7 @@ export class LoginPage {
   tologin(name: string, password: string) {
     this.submiting = true;
     this.socketService.login(name, password);
-    this.socketService.loginResult.subscribe((result: string) => {
+    let sub = this.socketService.loginResult.subscribe((result: string) => {
       if (result === '认证成功') {
         console.log('登陆成功');
         this.userService.myname = name;
@@ -57,6 +58,7 @@ export class LoginPage {
         // this.socketsevice.disconnect();
         console.log('认证失败');
       }
+      sub.unsubscribe();
     });
   }
 

@@ -1,15 +1,15 @@
 <!-- logged out menu -->
 <ion-menu id="loggedOutMenu" [content]="content">
 
-  <ion-header>
-    <ion-toolbar>
-      <ion-title>Menu</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <ion-header>
+        <ion-toolbar>
+            <ion-title>Menu</ion-title>
+        </ion-toolbar>
+    </ion-header>
 
-  <ion-content class="outer-content">
+    <ion-content class="outer-content">
 
-    <!--<ion-list>
+        <!--<ion-list>
       <ion-list-header>
         Navigate
       </ion-list-header>
@@ -19,71 +19,71 @@
       </button>
     </ion-list>-->
 
-    <ion-list>
-      <ion-list-header>
-        Account
-      </ion-list-header>
-      <button ion-item menuClose *ngFor="let p of loggedOutPages" (click)="openPage(p)">
+        <ion-list>
+            <ion-list-header>
+                账户
+            </ion-list-header>
+            <button ion-item menuClose *ngFor="let p of loggedOutPages" (click)="openPage(p)">
         <ion-icon item-left [name]="p.icon"></ion-icon>
         {{p.title}}
       </button>
-    </ion-list>
+        </ion-list>
 
-    <ion-list>
-      <ion-list-header>
-        Tutorial
-      </ion-list-header>
-      <button ion-item menuClose (click)="openTutorial()">
+        <ion-list>
+            <ion-list-header>
+                欢迎界面
+            </ion-list-header>
+            <button ion-item menuClose (click)="openTutorial()">
         <ion-icon item-left name="hammer"></ion-icon>
-        Show Tutorial
+        显示欢迎界面
       </button>
-    </ion-list>
-  </ion-content>
+        </ion-list>
+    </ion-content>
 
 </ion-menu>
 
 <!-- logged in menu -->
 <ion-menu id="loggedInMenu" [content]="content">
 
-  <ion-header>
-    <ion-toolbar>
-      <ion-title>Menu</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <ion-header>
+        <ion-toolbar>
+            <ion-title>Menu</ion-title>
+        </ion-toolbar>
+    </ion-header>
 
-  <ion-content class="outer-content">
+    <ion-content class="outer-content">
 
-    <ion-list>
-      <ion-list-header>
-        Navigate
-      </ion-list-header>
-      <button ion-item menuClose *ngFor="let p of appPages" (click)="openPage(p)">
+        <ion-list>
+            <ion-list-header>
+                功能
+            </ion-list-header>
+            <button ion-item menuClose *ngFor="let p of appPages" (click)="openPage(p)">
         <ion-icon item-left [name]="p.icon"></ion-icon>
         {{p.title}}
       </button>
-    </ion-list>
+        </ion-list>
 
-    <ion-list>
-      <ion-list-header>
-        Account
-      </ion-list-header>
-      <button ion-item menuClose *ngFor="let p of loggedInPages" (click)="openPage(p)">
+        <ion-list>
+            <ion-list-header>
+                账户
+            </ion-list-header>
+            <button ion-item menuClose *ngFor="let p of loggedInPages" (click)="openPage(p)">
         <ion-icon item-left [name]="p.icon"></ion-icon>
         {{p.title}}
       </button>
-    </ion-list>
+        </ion-list>
 
-    <ion-list>
-      <ion-list-header>
-        Tutorial
-      </ion-list-header>
-      <button ion-item menuClose (click)="openTutorial()">
+        <ion-list>
+            <ion-list-header>
+                欢迎界面
+            </ion-list-header>
+            <button ion-item menuClose (click)="openTutorial()">
         <ion-icon item-left name="hammer"></ion-icon>
-        Show Tutorial
+        显示欢迎界面
       </button>
-    </ion-list>
+        </ion-list>
 
-  </ion-content>
+    </ion-content>
 
 </ion-menu>
 

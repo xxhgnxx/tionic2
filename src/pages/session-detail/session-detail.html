@@ -1,21 +1,15 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>Session</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>用户资料</ion-title>
+    </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h1>{{session.name}}</h1>
 
-  <h4 *ngFor="let speaker of session.speakers">
-    {{speaker.name}}
-  </h4>
 
-  <p>
-    {{session.timeStart}} - {{session.timeEnd}}
-  </p>
+<ion-content class="outer-content">
+    <div padding-top text-center>
+        <img class="otheruserhead" [src]="session.headPic|getHead" alt="avatar">
 
-  <p>{{session.location}}</p>
-
-  <p>{{session.description}}</p>
+        <h2>{{session.name}}</h2>
+    </div>
 </ion-content>

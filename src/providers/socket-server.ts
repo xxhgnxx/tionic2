@@ -8,6 +8,7 @@ import { Events } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Output } from '@angular/core';
 import { EventEmitter } from '@angular/core';
+import { LoginPage } from '../pages/login/login';
 
 @Injectable()
 export class SocketService {
@@ -34,9 +35,9 @@ export class SocketService {
 
         } else {
 
-            // this.socket = io.connect('http://192.168.1.14:81', { reconnection: false });
+            this.socket = io.connect('http://192.168.1.14:81', { reconnection: false });
             // this.socket = io.connect('http://127.0.0.1:81', {reconnection: false}); this.socket
-            this.socket = io.connect('http://hk.airir.com:81', { reconnection: false });
+            // this.socket = io.connect('http://hk.airir.com:81', { reconnection: false });
             return new Promise(resolve => {
                 let tmptimer = setTimeout(() => {
                     console.log(Date().toString().slice(15, 25), '连接服务器', '失败,重试');
@@ -58,7 +59,7 @@ export class SocketService {
 
     public init() {
         this.socket.on('system', (data: Data) => {
-            // console.log('收到数据包', data);
+            console.log('收到数据包', data);
             this.system(data);
         })
     }
@@ -116,9 +117,15 @@ export class SocketService {
 
             case 'updata':
                 break;
+            case 'rtcend':
+                this.videcall.emit(data);
+                break;
             case 'call':
                 console.log("收到视频请求", data);
-                this.videcall.emit(data);
+                this.events.publish('socket:call');
+                setTimeout(() => {
+                    this.videcall.emit(data);
+                }, 500);
                 break;
             case "candidate":
                 {
@@ -213,6 +220,14 @@ export class SocketService {
         }
     }
 
+
+    logout() {
+        this.socket.disconnect();
+        this.userService.isLogin = false;
+        this.events.publish('user:logout');
+
+
+    }
 
 
 }

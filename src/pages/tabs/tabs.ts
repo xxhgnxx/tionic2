@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import { NavParams } from 'ionic-angular';
+import { Events } from 'ionic-angular';
 
 import { AboutPage } from '../about/about';
 import { SchedulePage } from '../schedule/schedule';
@@ -18,12 +19,20 @@ export class TabsPage {
   // set the root pages for each tab
   tab1Root: any = SchedulePage;
   tab2Root: any = ChatComponent;
-  tab3Root: any = WebrtcComponent;
+  tab3Root: any = VoiceComponent;
   tab4Root: any = MyvedioComponent;
   mySelectedIndex: number;
 
-  constructor(navParams: NavParams) {
+  constructor(
+    navParams: NavParams,
+    private events: Events
+  ) {
     this.mySelectedIndex = navParams.data.tabIndex || 0;
   }
 
+
+  tabchange() {
+    console.log("tabchange");
+    this.events.publish('user:tabchange');
+  }
 }
