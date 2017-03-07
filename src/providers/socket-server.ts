@@ -35,9 +35,9 @@ export class SocketService {
 
         } else {
 
-            // this.socket = io.connect('http://192.168.1.14:81', { reconnection: false });
-            // this.socket = io.connect('http://127.0.0.1:81', {reconnection: false}); this.socket
-            this.socket = io.connect('http://hk.airir.com:81', { reconnection: false });
+            // this.socket = io.connect('https://192.168.1.14:88', { reconnection: false });
+            // this.socket = io.connect('https://127.0.0.1:88', {reconnection: false}); this.socket
+            this.socket = io.connect('https://hk.airir.com:88', { reconnection: false });
             return new Promise(resolve => {
                 let tmptimer = setTimeout(() => {
                     console.log(Date().toString().slice(15, 25), '连接服务器', '失败,重试');
