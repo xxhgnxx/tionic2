@@ -37,7 +37,8 @@ export class SocketService {
 
             // this.socket = io.connect('https://192.168.1.14:88', { reconnection: false });
             // this.socket = io.connect('https://127.0.0.1:88', {reconnection: false}); this.socket
-            this.socket = io.connect('https://hk.airir.com:88', { reconnection: false });
+            // this.socket = io.connect('https://hk.airir.com:88', { reconnection: false });
+            this.socket = io.connect('https://dt.lexianyi.com:88', { reconnection: false });
             return new Promise(resolve => {
                 let tmptimer = setTimeout(() => {
                     console.log(Date().toString().slice(15, 25), '连接服务器', '失败,重试');
