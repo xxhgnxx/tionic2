@@ -21,8 +21,8 @@ export class WebrtcService {
             { "url": "stun:hk.airir.com" },
             {
                 "url": "turn:hk.airir.com",
-                "username": "123",
-                "credential": "123"
+                "username": "",
+                "credential": ""
             }]
     };
     private pclist = new Map<string, any>();

@@ -44,7 +44,7 @@
         <ion-avatar item-left>
                       <img [src]="user.headPic|getHead" alt="Speaker profile pic">
         </ion-avatar>
-        {{user.name}} {{user.isOnline}}
+        {{user.name}} 
       </button>
                 <ion-item-options>
                     <button ion-button color="favorite" (click)="addFavorite(slidingItem, session)" *ngIf="segment === 'all'">
