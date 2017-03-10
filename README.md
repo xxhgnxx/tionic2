@@ -23,12 +23,12 @@ git:https://github.com/xxhgnxx/server
 
 ## App Preview
 
-  <img src="resources/screenshots/1.PNG" alt="" width= "30%">
-  <img src="resources/screenshots/2.PNG" alt="" width= "30%">
-  <img src="resources/screenshots/3.PNG" alt="" width= "30%">
-  <img src="resources/screenshots/4.PNG" alt="" width= "30%">
-  <img src="resources/screenshots/5.PNG" alt="" width= "30%">
-  <img src="resources/screenshots/6.PNG" alt="" width= "30%">
+  <img src="resources/screenshots/1.PNG" alt="" width= "30%" border="1px solid black">
+  <img src="resources/screenshots/2.PNG" alt="" width= "30%" border="1px solid black">
+  <img src="resources/screenshots/3.PNG" alt="" width= "30%" border="1px solid black">
+  <img src="resources/screenshots/4.PNG" alt="" width= "30%" border="1px solid black">
+  <img src="resources/screenshots/5.PNG" alt="" width= "30%" border="1px solid black">
+  <img src="resources/screenshots/6.PNG" alt="" width= "30%" border="1px solid black">
 
 ## File Structure of App
 
