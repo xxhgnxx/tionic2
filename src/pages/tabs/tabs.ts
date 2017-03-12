@@ -48,9 +48,7 @@ export class TabsPage {
     }
   }
   tabchange() {
-    
     if ((this.tabs.getSelected() && this.tabs.getSelected().index) === 2) {
-     
       this.socketService.newmsg = true;
     };
     this.events.publish('user:tabchange');
