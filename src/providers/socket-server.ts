@@ -13,6 +13,8 @@ import { LoginPage } from '../pages/login/login';
 @Injectable()
 export class SocketService {
     private testmsglist = new Array();
+    public newmsg = true;
+    public newmsgnumber = 0;
     public isconnected = false;
     public socket: SocketIOClient.Socket;
     @Output() loginResult: EventEmitter<any> = new EventEmitter();
@@ -51,6 +53,7 @@ export class SocketService {
                     resolve(this.socket.id);
                     clearTimeout(tmptimer);
                     this.init();
+                    resolve(true);
                 });
             });
 
@@ -141,7 +144,9 @@ export class SocketService {
             case "testMsg":
                 {
                     console.log('testMsg', data);
-
+                    if (this.newmsg) {
+                        this.newmsgnumber++;
+                    }
                     this.testmsglist.push(data);
                     break;
                 }

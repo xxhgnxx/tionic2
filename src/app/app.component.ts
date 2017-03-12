@@ -14,7 +14,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { TutorialPage } from '../pages/tutorial/tutorial';
 import { SupportPage } from '../pages/support/support';
 
-
+import 'webrtc-adapter/out/adapter.js';
 
 import { WebrtcComponent } from '../pages/webrtc/webrtc.component';
 import { VoiceComponent } from '../pages/voice/voice.component';

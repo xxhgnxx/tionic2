@@ -1,6 +1,8 @@
 <ion-tabs [selectedIndex]="mySelectedIndex" (ionChange)="tabchange()">
+    <ion-tab [root]="tab0Root" tabTitle="测试页" tabIcon="contacts"></ion-tab>
     <ion-tab [root]="tab1Root" tabTitle="用户列表" tabIcon="contacts"></ion-tab>
-    <ion-tab [root]="tab2Root" tabTitle="文字聊天" tabIcon="chatboxes"></ion-tab>
+    <ion-tab [root]="tab2Root" tabTitle="文字聊天" tabIcon="chatboxes" [tabBadge]="getnemsgnumber()" (ionSelect)="clearnewnumber()">
+    </ion-tab>
     <ion-tab [root]="tab3Root" tabTitle="语音房间" tabIcon="microphone"></ion-tab>
     <ion-tab [root]="tab4Root" tabTitle="视频房间" tabIcon="videocam"></ion-tab>
 </ion-tabs>

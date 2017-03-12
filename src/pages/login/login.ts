@@ -23,6 +23,7 @@ export class LoginPage {
       console.log('插入tab页');
     } else {
       this.socketService.start();
+      // this.tologin(Math.round(Math.random()*100).toString(),"1");
     }
 
   }

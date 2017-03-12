@@ -1,8 +1,11 @@
 // Styles for all of the user pages:
 // Login, Signup, Support
+$width: 150px;
 page-user {
     .logo {
         padding: 3px 0;
+        // width: 80vw;
+        // height: 80vw;
         // min-height: 200px;
         text-align: center;
     }
