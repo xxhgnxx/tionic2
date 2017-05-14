@@ -126,10 +126,10 @@ export class SocketService {
                 break;
             case 'call':
                 console.log("收到视频请求", data);
-                this.events.publish('socket:call');
-                setTimeout(() => {
                     this.videcall.emit(data);
-                }, 500);
+                // this.events.publish('socket:call');
+                // setTimeout(() => {
+                // }, 500);
                 break;
             case "candidate":
                 {
